@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    tools:context="com.subang.worker.activity.BarcodeActivity">
+
+    <fragment
+        android:id="@+id/fm_sacn"
+        android:name="com.welcu.android.zxingfragmentlib.BarCodeScannerFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center" />
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal"
+        android:paddingBottom="5dip">
+
+        <EditText
+            android:id="@+id/et_barcode"
+            android:layout_width="200dip"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:inputType="number"
+            android:maxLength="@integer/barcode"
+            android:padding="5dip" />
+
+        <Button
+            android:id="@+id/btn_stop"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="btn_stop_onClick"
+            android:padding="5dip"
+            android:text="停止扫描" />
+
+        <Button
+            android:id="@+id/btn_ok"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:onClick="btn_ok_onClick"
+            android:padding="5dip"
+            android:text="确定" />
+    </LinearLayout>
+</FrameLayout>
