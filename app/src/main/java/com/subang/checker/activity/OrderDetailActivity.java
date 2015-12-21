@@ -15,8 +15,10 @@ import com.subang.bean.OrderDetail;
 import com.subang.checker.helper.AddrDataHelper;
 import com.subang.checker.util.AppConst;
 import com.subang.checker.util.AppUtil;
+import com.subang.checker.util.ComUtil;
 import com.subang.domain.Clothes;
 import com.subang.domain.History;
+import com.subang.util.WebConst;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -56,6 +58,11 @@ public class OrderDetailActivity extends Activity {
                     AppUtil.networkTip(OrderDetailActivity.this);
                     break;
                 }
+                case AppConst.WHAT_INFO: {
+                    String info = ComUtil.getInfo(msg);
+                    AppUtil.tip(OrderDetailActivity.this, info);
+                    break;
+                }
                 case WHAT_DETAIL: {
                     showDetail();
                     break;
@@ -80,6 +87,13 @@ public class OrderDetailActivity extends Activity {
             if (orderDetail == null) {
                 handler.sendEmptyMessage(AppConst.WHAT_NETWORK_ERR);
                 return;
+            }
+            if (type == WebConst.ORDER_GET_BARCODE) {
+                if (orderDetail.getOrderno() == null) {
+                    Message msg = ComUtil.getMessage(AppConst.WHAT_INFO, "条形码错误。");
+                    handler.sendMessage(msg);
+                    return;
+                }
             }
             handler.sendEmptyMessage(WHAT_DETAIL);
             if (orderDetail.isChecked()) {

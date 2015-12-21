@@ -13,7 +13,7 @@
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
+        android:label="@string/name_app"
         android:screenOrientation="portrait"
         android:supportsRtl="true"
         android:theme="@style/FullscreenTheme">
@@ -25,7 +25,7 @@
             android:value="subang_checker_android"/>
         <activity
             android:name=".LoadActivity"
-            android:label="分拣员">
+            android:label="@string/name_app">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

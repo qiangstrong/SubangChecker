@@ -9,6 +9,7 @@ import android.widget.EditText;
 
 import com.google.zxing.Result;
 import com.subang.checker.util.AppUtil;
+import com.subang.util.Validator;
 import com.welcu.android.zxingfragmentlib.BarCodeScannerFragment;
 
 public class BarcodeActivity extends FragmentActivity {
@@ -40,9 +41,9 @@ public class BarcodeActivity extends FragmentActivity {
     }
 
     public void btn_ok_onClick(View view) {
-        int barcodeLength = getResources().getInteger(R.integer.barcode);
         String barcode = tv_barcode.getText().toString();
-        if (barcode.length() != barcodeLength) {
+        com.subang.bean.Result result= Validator.validBarcode(barcode);
+        if (!result.isOk()) {
             AppUtil.tip(BarcodeActivity.this, "条形码错误。");
             return;
         }

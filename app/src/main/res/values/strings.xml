@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">分拣员</string>
+    <string name="name_app">分拣员</string>
     <string name="file_checker">checker</string>
     <string name="err_network">网络连接错误，请检查网络是否连通。</string>
     <string name="flag_user">我们只做最专业的品质服务</string>

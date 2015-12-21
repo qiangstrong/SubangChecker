@@ -13,11 +13,20 @@ import com.subang.bean.AppInfo;
 import com.subang.checker.activity.R;
 import com.subang.util.WebConst;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 
 /**
  * Created by Qiang on 2015/10/31.
  */
 public class AppUtil {
+
+    private static int NETWORK_TIP_INTERVAL = 30000;//30s
+
+    private static boolean isNetworkTip = true;
+    private static Timer timer;    //调度timerTask
+    private static TimerTask timerTask;        //30s后可以再次提示网络错误
 
     //配置app，使用AppConf前调用此函数。如果没有配置，则配置
     public static boolean conf(Context context) {
@@ -51,8 +60,22 @@ public class AppUtil {
     }
 
     public static void networkTip(Context context) {
+        if (!isNetworkTip) {
+            return;
+        }
         Toast toast = Toast.makeText(context, R.string.err_network, Toast.LENGTH_SHORT);
         toast.show();
+        isNetworkTip = false;
+        timerTask = new TimerTask() {
+            @Override
+            public void run() {
+                isNetworkTip = true;
+            }
+        };
+        if (timer == null) {
+            timer = new Timer();
+        }
+        timer.schedule(timerTask, NETWORK_TIP_INTERVAL);
     }
 
     public static void tip(Context context, String info) {
