@@ -8,6 +8,8 @@ import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.SimpleAdapter;
 
+import com.umeng.update.UmengUpdateAgent;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -44,6 +46,9 @@ public class MainActivity extends Activity {
                 new String[]{"text"}, new int[]{R.id.tv_text});
         gv_action.setAdapter(actionSimpleAdapter);
         gv_action.setOnItemClickListener(actionOnItemClickListener);
+
+        //友盟自动更新
+        UmengUpdateAgent.update(this);
     }
 
     private void findView() {

@@ -1,11 +1,15 @@
 package com.subang.checker.util;
 
 import android.content.Context;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.support.annotation.StringRes;
 import android.widget.Toast;
 
 import com.subang.api.SubangAPI;
+import com.subang.bean.AppInfo;
 import com.subang.checker.activity.R;
 import com.subang.util.WebConst;
 
@@ -21,9 +25,9 @@ public class AppUtil {
             return true;
         }
         String basePath = context.getFilesDir().getAbsolutePath() + "/";
-        AppConf.basePath=basePath;
-        AppConf.cellnum="";
-        AppConf.password="";
+        AppConf.basePath = basePath;
+        AppConf.cellnum = "";
+        AppConf.password = "";
         return true;
     }
 
@@ -54,5 +58,22 @@ public class AppUtil {
     public static void tip(Context context, String info) {
         Toast toast = Toast.makeText(context, info, Toast.LENGTH_SHORT);
         toast.show();
+    }
+
+    public static void tip(Context context, @StringRes int resId) {
+        Toast toast = Toast.makeText(context, resId, Toast.LENGTH_SHORT);
+        toast.show();
+    }
+
+    public static AppInfo getAppInfo(Context context) {
+        PackageInfo packageInfo = null;
+        try {
+            packageInfo = context.getPackageManager().getPackageInfo(context.getPackageName(), 0);
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
+        Integer version = packageInfo.versionCode;
+        AppInfo appInfo = new AppInfo(AppInfo.USER_CHECKER, AppInfo.OS_ANDROID, version);
+        return appInfo;
     }
 }

@@ -17,6 +17,12 @@
         android:screenOrientation="portrait"
         android:supportsRtl="true"
         android:theme="@style/FullscreenTheme">
+        <meta-data
+            android:name="UMENG_APPKEY"
+            android:value="56775acde0f55a3053000ba3"/>
+        <meta-data
+            android:name="UMENG_CHANNEL"
+            android:value="subang_checker_android"/>
         <activity
             android:name=".LoadActivity"
             android:label="分拣员">
@@ -32,6 +38,15 @@
         <activity
             android:name=".BarcodeActivity"
             android:screenOrientation="landscape" />
+
+        <!-- 友盟自动更新 -->
+        <service
+            android:name="com.umeng.update.net.DownloadingService"
+            android:process=":DownloadingService"/>
+
+        <activity
+            android:name="com.umeng.update.UpdateDialogActivity"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
     </application>
 
 </manifest>
